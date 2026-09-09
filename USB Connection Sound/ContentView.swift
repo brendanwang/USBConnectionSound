@@ -12,7 +12,7 @@ struct ContentView: View {
                     .frame(width: 60, height: 60)
                     .background(.blue.opacity(0.1), in: RoundedRectangle(cornerRadius: 16))
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("USB Connection").font(.title2.bold())
+                    Text("USB Connection Sound").font(.title2.bold())
                     Text("A little sound. A clear connection.")
                         .foregroundStyle(.secondary)
                 }
@@ -20,13 +20,17 @@ struct ContentView: View {
 
             GroupBox {
                 VStack(alignment: .leading, spacing: 16) {
-                    Toggle(isOn: $monitor.enabled) {
+                    HStack(spacing: 12) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("USB sounds").font(.headline)
                             Text(monitor.enabled ? "Hear when devices come and go." : "Sounds are muted. Devices are still tracked.")
                                 .font(.caption).foregroundStyle(.secondary)
                         }
-                    }.toggleStyle(.switch)
+                        Spacer(minLength: 12)
+                        Toggle("USB sounds", isOn: $monitor.enabled)
+                            .labelsHidden()
+                            .toggleStyle(.switch)
+                    }
                     Divider()
                     HStack {
                         Image(systemName: "speaker.fill").foregroundStyle(.secondary)

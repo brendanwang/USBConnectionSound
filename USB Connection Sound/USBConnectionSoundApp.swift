@@ -6,18 +6,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 @main
-struct USBConnectionApp: App {
+struct USBConnectionSoundApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     @State private var monitor = USBMonitor()
 
     var body: some Scene {
-        Window("USB Connection", id: "main") {
+        Window("USB Connection Sound", id: "main") {
             ContentView(monitor: monitor)
         }
         .defaultSize(width: 480, height: 590)
         .windowResizability(.contentSize)
 
-        MenuBarExtra("USB Connection", systemImage: monitor.enabled ? "cable.connector" : "speaker.slash") {
+        MenuBarExtra("USB Connection Sound", systemImage: monitor.enabled ? "cable.connector" : "speaker.slash") {
             MenuContent(monitor: monitor)
         }
         .menuBarExtraStyle(.window)
@@ -31,7 +31,7 @@ private struct MenuContent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             VStack(alignment: .leading, spacing: 4) {
-                Label("USB Connection", systemImage: "cable.connector")
+                Label("USB Connection Sound", systemImage: "cable.connector")
                     .font(.headline)
                 Text(monitor.isRunning ? "Listening · \(monitor.devices.count) USB devices" : "Monitoring unavailable")
                     .font(.caption)

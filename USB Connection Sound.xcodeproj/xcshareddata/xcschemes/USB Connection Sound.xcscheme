@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CF2165BF3051286E00BA5581"
-               BuildableName = "USBConnection.app"
-               BlueprintName = "USBConnection"
-               ReferencedContainer = "container:USBConnection.xcodeproj">
+               BuildableName = "USB Connection Sound.app"
+               BlueprintName = "USB Connection Sound"
+               ReferencedContainer = "container:USB Connection Sound.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CF2165BF3051286E00BA5581"
-            BuildableName = "USBConnection.app"
-            BlueprintName = "USBConnection"
-            ReferencedContainer = "container:USBConnection.xcodeproj">
+            BuildableName = "USB Connection Sound.app"
+            BlueprintName = "USB Connection Sound"
+            ReferencedContainer = "container:USB Connection Sound.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CF2165BF3051286E00BA5581"
-            BuildableName = "USBConnection.app"
-            BlueprintName = "USBConnection"
-            ReferencedContainer = "container:USBConnection.xcodeproj">
+            BuildableName = "USB Connection Sound.app"
+            BlueprintName = "USB Connection Sound"
+            ReferencedContainer = "container:USB Connection Sound.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

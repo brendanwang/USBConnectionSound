@@ -1,8 +1,8 @@
-# USB Connection
+# USB Connection Sound
 
 A native macOS utility that plays original rising and falling chimes when USB devices connect and disconnect.
 
-Open `USBConnection.xcodeproj` in Xcode and run the USBConnection scheme. The app targets macOS 14 Sonoma or later on Apple silicon and Intel Macs. Building the project requires Xcode 26.1 or later. Monitoring starts immediately, and closing the window keeps the app running in the menu bar. Use the menu bar menu to reopen the window or quit.
+Open `USB Connection Sound.xcodeproj` in Xcode and run the USB Connection Sound scheme. The app targets macOS 14 Sonoma or later on Apple silicon and Intel Macs. Building the project requires Xcode 26.1 or later. Monitoring starts immediately, and closing the window keeps the app running in the menu bar. Use the menu bar menu to reopen the window or quit.
 
 - Independent connection and disconnection chimes, with preview buttons.
 - Saved mute and volume settings; preview buttons work even when alerts are muted.
@@ -25,13 +25,13 @@ For everyday use, use a Release build and keep only one copy running. In Xcode, 
 Build:
 
 ```sh
-xcodebuild -project USBConnection.xcodeproj -scheme USBConnection -configuration Debug -derivedDataPath /tmp/USBConnection-build CODE_SIGNING_ALLOWED=NO build
+xcodebuild -project "USB Connection Sound.xcodeproj" -scheme "USB Connection Sound" -configuration Debug -derivedDataPath /tmp/USBConnectionSound-build CODE_SIGNING_ALLOWED=NO build
 ```
 
 Monitor lifecycle smoke test (run from the repository root):
 
 ```sh
-xcrun swiftc -parse-as-library USBConnection/USBMonitor.swift Tests/MonitorSmoke.swift -o /tmp/usb-monitor-smoke
+xcrun swiftc -parse-as-library "USB Connection Sound/USBMonitor.swift" Tests/MonitorSmoke.swift -o /tmp/usb-monitor-smoke
 /tmp/usb-monitor-smoke
 ```
 
