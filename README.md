@@ -2,7 +2,7 @@
 
 A native macOS utility that plays original rising and falling chimes when USB devices connect and disconnect.
 
-Open `USBConnection.xcodeproj` in Xcode and run the USBConnection scheme. The project currently targets macOS 26.1 or later. Monitoring starts immediately, and closing the window keeps the app running in the menu bar. Use the menu bar menu to reopen the window or quit.
+Open `USBConnection.xcodeproj` in Xcode and run the USBConnection scheme. The app targets macOS 14 Sonoma or later on Apple silicon and Intel Macs. Building the project requires Xcode 26.1 or later. Monitoring starts immediately, and closing the window keeps the app running in the menu bar. Use the menu bar menu to reopen the window or quit.
 
 - Independent connection and disconnection chimes, with preview buttons.
 - Saved mute and volume settings; preview buttons work even when alerts are muted.
