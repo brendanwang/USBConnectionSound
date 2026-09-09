@@ -5,6 +5,11 @@ import Observation
 struct USBDevice: Identifiable {
     let id: UInt64
     let name: String
+    var vendorName: String? = nil
+    var serialNumber: String? = nil
+    var vendorID: Int? = nil
+    var productID: Int? = nil
+    var speed: String? = nil
 }
 
 struct USBEvent: Identifiable {
@@ -132,9 +137,18 @@ final class USBMonitor {
             guard IORegistryEntryGetRegistryEntryID(service, &id) == KERN_SUCCESS else { continue }
             if connected {
                 guard !inventory.contains(id: id) else { continue }
-                let name = IORegistryEntryCreateCFProperty(service, "USB Product Name" as CFString,
-                    kCFAllocatorDefault, 0)?.takeRetainedValue() as? String ?? "USB device"
-                changed = inventory.insert(USBDevice(id: id, name: name)) || changed
+                let name = stringProperty("USB Product Name", from: service) ?? "USB device"
+                let vendorID = integerProperty("idVendor", from: service)
+                let device = USBDevice(
+                    id: id,
+                    name: name,
+                    vendorName: vendorName(from: service, vendorID: vendorID),
+                    serialNumber: stringProperty("USB Serial Number", from: service),
+                    vendorID: vendorID,
+                    productID: integerProperty("idProduct", from: service),
+                    speed: usbSpeedDescription(integerProperty("USBSpeed", from: service))
+                )
+                changed = inventory.insert(device) || changed
                 record(name: name, connected: true)
             } else if let device = inventory.remove(id: id) {
                 changed = true
@@ -143,6 +157,54 @@ final class USBMonitor {
         }
         // One sort and UI snapshot per delivered batch; sounds still start immediately.
         if changed { devices = inventory.sorted }
+    }
+
+    private func stringProperty(_ key: String, from service: io_service_t) -> String? {
+        IORegistryEntryCreateCFProperty(service, key as CFString, kCFAllocatorDefault, 0)?
+            .takeRetainedValue() as? String
+    }
+
+    private func integerProperty(_ key: String, from service: io_service_t) -> Int? {
+        let value = IORegistryEntryCreateCFProperty(service, key as CFString, kCFAllocatorDefault, 0)?
+            .takeRetainedValue()
+        return (value as? NSNumber)?.intValue
+    }
+
+    private func vendorName(from service: io_service_t, vendorID: Int?) -> String? {
+        if let reportedName = stringProperty("USB Vendor Name", from: service)?
+            .trimmingCharacters(in: .whitespacesAndNewlines),
+           !reportedName.isEmpty {
+            return reportedName
+        }
+
+        // Some USB firmware supplies only the standardized numeric vendor ID.
+        guard let vendorID else { return nil }
+        return Self.commonVendorNames[vendorID]
+    }
+
+    private static let commonVendorNames: [Int: String] = [
+        0x0502: "Acer",
+        0x0781: "SanDisk",
+        0x05AC: "Apple",
+        0x045E: "Microsoft",
+        0x046D: "Logitech",
+        0x04E8: "Samsung",
+        0x0951: "Kingston",
+        0x1058: "Western Digital",
+        0x0BC2: "Seagate",
+        0x0BDA: "Realtek",
+        0x8087: "Intel"
+    ]
+
+    private func usbSpeedDescription(_ value: Int?) -> String? {
+        switch value {
+        case 0: "Low speed (1.5 Mb/s)"
+        case 1: "Full speed (12 Mb/s)"
+        case 2: "High speed (480 Mb/s)"
+        case 3: "SuperSpeed (5 Gb/s)"
+        case 4: "SuperSpeed+ (10 Gb/s)"
+        default: nil
+        }
     }
 
     private func record(name: String, connected: Bool) {

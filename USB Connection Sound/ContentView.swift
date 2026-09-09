@@ -67,15 +67,10 @@ struct ContentView: View {
                                 .foregroundStyle(.secondary).frame(maxWidth: .infinity).padding(.vertical, 25)
                         }
                         ForEach(monitor.devices) { device in
-                            HStack {
-                                Image(systemName: "cable.connector").foregroundStyle(.secondary)
-                                Text(device.name).lineLimit(1)
-                                Spacer()
-                                Circle().fill(.green).frame(width: 6, height: 6)
-                            }.padding(.vertical, 9)
+                            DeviceRow(device: device)
                         }
                     }
-                }.frame(height: 112)
+                }.frame(height: 180)
             }
 
             VStack(alignment: .leading, spacing: 8) {
@@ -112,5 +107,57 @@ struct ContentView: View {
         }
         .controlSize(.large)
         .help("Preview the \(title.lowercased()) sound")
+    }
+}
+
+private struct DeviceRow: View {
+    let device: USBDevice
+    @State private var isExpanded = false
+
+    var body: some View {
+        DisclosureGroup(isExpanded: $isExpanded) {
+            VStack(alignment: .leading, spacing: 7) {
+                if let vendorName = device.vendorName {
+                    detail("Vendor", vendorName)
+                }
+                if let speed = device.speed {
+                    detail("Speed", speed)
+                }
+                if let vendorID = device.vendorID {
+                    detail("Vendor ID", hex(vendorID))
+                }
+                if let productID = device.productID {
+                    detail("Product ID", hex(productID))
+                }
+                if let serialNumber = device.serialNumber {
+                    detail("Serial number", serialNumber)
+                }
+                detail("Registry ID", String(device.id))
+            }
+            .font(.caption)
+            .padding(.leading, 28)
+            .padding(.top, 7)
+            .padding(.bottom, 3)
+        } label: {
+            HStack(spacing: 9) {
+                Image(systemName: "cable.connector").foregroundStyle(.secondary)
+                Text(device.name).lineLimit(1)
+                Spacer()
+                Circle().fill(.green).frame(width: 6, height: 6)
+            }
+        }
+        .padding(.vertical, 9)
+        .accessibilityHint(isExpanded ? "Collapse device information" : "Show device information")
+    }
+
+    private func detail(_ label: String, _ value: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Text(label).foregroundStyle(.secondary).frame(width: 82, alignment: .leading)
+            Text(value).textSelection(.enabled)
+        }
+    }
+
+    private func hex(_ value: Int) -> String {
+        String(format: "0x%04X", value)
     }
 }
