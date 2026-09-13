@@ -4,7 +4,7 @@
   <img src="docs/app-icon.png" alt="USB Connection Sound app icon" width="192">
 </p>
 
-[USB Connection Sound Support & Downloads](https://brendanwang.github.io/USBSupportPage/)
+[USB Connection Sound Support & Downloads](https://brendanwang.github.io/USBSupportPage/?v=1.0.0)
 
 USB Connection Sound is a USB connection sound app for Mac and a native macOS USB monitor utility. It plays customizable connection and disconnection chimes when USB devices connect or disconnect, with USB device alerts and menu bar monitoring.
 
