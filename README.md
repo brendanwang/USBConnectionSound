@@ -1,5 +1,7 @@
 # USB Connection Sound
 
+<img src="docs/app-icon.png" alt="USB Connection Sound app icon" width="192">
+
 A native macOS utility that plays original rising and falling chimes when USB devices connect and disconnect.
 
 Open `USB Connection Sound.xcodeproj` in Xcode and run the USB Connection Sound scheme. The app targets macOS 14 Sonoma or later on Apple silicon and Intel Macs. Building the project requires Xcode 26.1 or later. Monitoring starts immediately, and closing the window keeps the app running in the menu bar. Use the menu bar menu to reopen the window or quit.
@@ -13,6 +15,12 @@ Open `USB Connection Sound.xcodeproj` in Xcode and run the USB Connection Sound 
 - App Sandbox stays enabled with the USB device entitlement. No driver installation is required.
 
 The app must be running to play sounds. Audio uses the Mac's current output and respects system volume/mute. USB-C accessories must enumerate as USB devices; power-only cables, Bluetooth devices, and Thunderbolt-only devices do not produce USB events. macOS may also report device re-enumeration during sleep/wake as a connection change.
+
+## Download
+
+[Download USB Connection Sound 1.0.0](https://github.com/brendanwang/USBConnectionSound/releases/download/v1.0.0/USBConnectionSound-1.0.0.dmg) for macOS 14 or later (Apple silicon and Intel). Open the DMG and drag USB Connection Sound to Applications. The complete Xcode project is included in the Source folder.
+
+This GitHub build is ad-hoc signed and is not notarized by Apple. macOS Gatekeeper may block its first launch.
 
 ## Energy use
 
