@@ -1,6 +1,8 @@
 # USB Connection Sound
 
-<img src="docs/app-icon.png" alt="USB Connection Sound app icon" width="192">
+<p align="center">
+  <img src="docs/app-icon.png" alt="USB Connection Sound app icon" width="192">
+</p>
 
 A native macOS utility that plays original rising and falling chimes when USB devices connect and disconnect.
 
