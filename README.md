@@ -6,7 +6,7 @@
 
 [USB Connection Sound Support](https://brendanwang.github.io/USBSupportPage/)
 
-A native macOS USB monitor utility that plays customizable connection and disconnection chimes when USB devices connect or disconnect. USB Connection Sound provides USB device alerts and menu bar monitoring for macOS.
+USB Connection Sound is a USB connection sound app for Mac and a native macOS USB monitor utility. It plays customizable connection and disconnection chimes when USB devices connect or disconnect, with USB device alerts and menu bar monitoring.
 
 Open `USB Connection Sound.xcodeproj` in Xcode and run the USB Connection Sound scheme. The app targets macOS 14 Sonoma or later on Apple silicon and Intel Macs. Building the project requires Xcode 26.1 or later. Monitoring starts immediately, and closing the window keeps the app running in the menu bar. Use the menu bar menu to reopen the window or quit.
 
